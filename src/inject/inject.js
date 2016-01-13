@@ -39,11 +39,28 @@ chrome.extension.sendMessage({}, function(response) {
       var styleLabels = function styleLabels(labels) {
         Array.prototype.forEach.call(labels, function(label) {
           if (isLabelEligible(label.textContent)) {
-            label.classList.add('blocked');
-          } else {
-            label.classList.remove('blocked');
+            var story = findStory(label);
+            if(!story) { return; }
+            styleStoryIcon(story);
           }
         });
+      }
+
+      function findStory(label) {
+        var currentNode = label;
+
+        while(Array.prototype.indexOf.call(currentNode.classList, 'story') === -1) {
+          currentNode = currentNode.parentElement;
+          if(!currentNode) { return null; }
+        }
+        return currentNode;
+      }
+
+      function styleStoryIcon(story) {
+        if(story.querySelector('header.preview span.meta')) {
+          var meta = story.querySelector('header.preview span.meta');
+          meta.classList.add("charter-story");
+        }
       }
     }
   }, 10);

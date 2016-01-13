@@ -1,41 +1,22 @@
 describe('isLabelEligible', function () {
   describe('approves of', function () {
-    it('blocked', function () {
-      expect(isLabelEligible('blocked')).toEqual(true);
+    it('is a charter charter', function () {
+      expect(isLabelEligible('charter')).toEqual(true);
     });
 
-    it('needs design', function () {
-      expect(isLabelEligible('needs design')).toEqual(true);
+    it('charter with labels after it', function () {
+      expect(isLabelEligible('charter, something')).toEqual(true);
     });
 
-    it('needs detail', function () {
-      expect(isLabelEligible('needs detail')).toEqual(true);
+    it('charter with labels before it', function () {
+      expect(isLabelEligible('a label, charter')).toEqual(true);
     });
 
-    it('needs-pm', function () {
-      expect(isLabelEligible('needs-pm')).toEqual(true);
-    });
-
-    it('▩▩blocked▩▩', function () {
-      expect(isLabelEligible('▩▩blocked▩▩')).toEqual(true);
-    });
-
-    it('▩▩ blocked ▩▩', function () {
-      expect(isLabelEligible('▩▩ blocked ▩▩')).toEqual(true);
-    });
-
-    it('✖ needs backend story ✖', function () {
-      expect(isLabelEligible('✖ needs backend story ✖')).toEqual(true);
-    });
-
-    it('-blocked-', function () {
-      expect(isLabelEligible('-blocked-')).toEqual(true);
-    });
   });
 
   describe('hates', function () {
-    it('need supply', function () {
-      expect(isLabelEligible('need supply')).toEqual(false);
+    it('not actually a charter', function () {
+      expect(isLabelEligible('chorter')).toEqual(false);
     });
   });
 });
