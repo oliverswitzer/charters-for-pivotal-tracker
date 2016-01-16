@@ -6,7 +6,10 @@
   "description": "New icon for Charters in your Pivotal Tracker backlog",
   "homepage_url": "https://github.com/kimberlyjohnson/charters-for-pivotal-tracker",
   "icons": {
-    "64": "icons/icon64.png"
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "64": "icons/icon64.png",
+    "128": "icons/icon128.png"
   },
   "permissions": [
     "http://www.pivotaltracker.com/*",
