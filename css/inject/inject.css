@@ -1,4 +1,18 @@
-.meta.charter-story:before {
-  content: "🚀";
+.meta.dev-diary.happy:before {
+  content: "😃";
+  font-size: 1.4em;
   background-image: none!important
 }
+
+.meta.dev-diary.meh:before {
+  content: "😃";
+  font-size: 1.4em;
+  background-image: none!important
+}
+
+.meta.dev-diary.sad:before {
+  content: "😞";
+  font-size: 1.4em;
+  background-image: none!important
+}
+
