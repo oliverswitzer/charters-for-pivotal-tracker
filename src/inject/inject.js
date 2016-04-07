@@ -1,12 +1,11 @@
 chrome.extension.sendMessage({}, function(response) {
   var readyStateCheckInterval = setInterval(function() {
-    if (document.readyState === "complete") {
-      clearInterval(readyStateCheckInterval);
 
+    if (document.readyState === 'complete') {
+      clearInterval(readyStateCheckInterval);
       var observer = new MutationObserver(function (mutations) {
         mutations.forEach(handleMutationEvents);
       });
-
       // configuration of the observer:
       var config = {
         attributes: true,
@@ -56,10 +55,38 @@ chrome.extension.sendMessage({}, function(response) {
         return currentNode;
       }
 
+      var getTasks = function getTasks(story) {
+        var storyId = getStoryId(story);
+        return document.querySelectorAll('.' + storyId + ' section.tasks');
+      };
+
+      var getMetadata = function getMetadata(story) {
+        return story.querySelector('header.preview span.meta')
+      };
+
+      function getStoryId(story) {
+        var storyId = Array.prototype.find.call(story.classList, function (classSelector) {
+          var matchResult = classSelector.match(/story_\d*/i);
+          if (matchResult) {
+            return matchResult
+          }
+        });
+        return storyId;
+      }
+
       function styleStoryIcon(story) {
         if(story.querySelector('header.preview span.meta')) {
-          var meta = story.querySelector('header.preview span.meta');
-          meta.classList.add("charter-story");
+          var meta = getMetadata(story);
+          meta.classList.add('dev-diary');
+
+          var storyTasks = getTasks(story);
+          if (storyTasks == null || storyTasks.length >= 0 || storyTasks.length <= 4) {
+            meta.classList.add('happy');
+          } else if (storyTasks.length >= 5 || storyTasks <= 8) {
+            meta.classList.add('meh')
+          } else {
+            meta.classList.add('sad')
+          }
         }
       }
     }
