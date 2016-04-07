@@ -1,22 +1,21 @@
 describe('isLabelEligible', function () {
   describe('approves of', function () {
-    it('is a charter charter', function () {
-      expect(isLabelEligible('charter')).toEqual(true);
+    it('is a dev diary', function () {
+      expect(isLabelEligible('dev diary')).toEqual(true);
     });
 
-    it('charter with labels after it', function () {
-      expect(isLabelEligible('charter, something')).toEqual(true);
+    it('dev diary with labels after it', function () {
+      expect(isLabelEligible('dev diary, charter, something')).toEqual(true);
     });
 
-    it('charter with labels before it', function () {
-      expect(isLabelEligible('a label, charter')).toEqual(true);
+    it('dev diary with labels before it', function () {
+      expect(isLabelEligible('a label, dev diary')).toEqual(true);
     });
-
   });
 
   describe('hates', function () {
-    it('not actually a charter', function () {
-      expect(isLabelEligible('chorter')).toEqual(false);
+    it('not actually a dev diary', function () {
+      expect(isLabelEligible('derp diary')).toEqual(false);
     });
   });
 });
